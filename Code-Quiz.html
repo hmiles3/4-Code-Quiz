@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <button>View Highscores</button>
+        </div>
+        <div class="col-sm-9">
+          <p class="time">Time: 0</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <h1 id="question">Coding Quiz Challenge</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-7">
+          <p id = "instructions">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+        </div>
+      </div>
+      <div class="row">
+          <ul id="buttonList">
+            <button id="begin" class="btn">Start Quiz</button>
+          </ul>
+      </div>
+    </div>
+<script>
+  document.getElementById("begin").addEventListener("click", startQuiz);
+  var questions = ["Commonly used data types DO NOT include:", "question 2", "question 3", "question 4"]
+  var question1answers = ["1. strings", "2. booleans", "3. alerts", "4. numbers"]
+  var question2answers = ["answer 1", "answer2", "answer 3", "answer 4"]
+  var question3answers = ["answer 1", "answer2", "answer 3", "answer 4"]
+  var question4answers = ["answer 1", "answer2", "answer 3", "answer 4"]
+  var questionNum = -1
+  var newQuestion = document.querySelector("#question")
+  function startQuiz(event) {
+    var paragraph = document.getElementById("instructions");
+    var answerNum = 0
+    event.preventDefault();
+    newQuestion.innerHTML = "";
+    var newh1 = document.createElement("h1");
+    newh1.textContent = questions[questionNum];
+    newQuestion.appendChild(newh1);
+    questionNum++;
+    answerButtons = "";
+    var i;
+    var div= document.getElementById("row")
+    var ul = document.getElementById("buttonList")
+    for(i=0; i<question1answers.length; i++){
+      document.getElementById("question").innerHTML = questions[questionNum];
+      var btn = document.createElement("BUTTON");
+      btn.setAttribute("class", "choices")
+      buttonList.appendChild(btn)  
+      btn.innerHTML = question1answers[i]
+    }
+    var startQuiz = document.getElementById("begin");
+    startQuiz.remove();
+    paragraph.remove();
+    setTime();
+  }
+
+  var secondsLeft = 100
+  var timeEl = document.querySelector(".time")
+  function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = "Time: " + secondsLeft;
+
+    if(secondsLeft === 0) {
+      clearInterval(timerInterval);
+      sendMessage();
+    }
+
+  }, 1000);
+}
+  function sendMessage() {
+  timeEl.textContent = "Time's up!";
+  }
+
+</script>
+</body>
+</html>
